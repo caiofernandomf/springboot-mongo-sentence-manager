@@ -49,7 +49,7 @@ public class WordController {
 
     @GetMapping("/language")
     public ResponseEntity<List<Word>> getByLanguage(HttpServletRequest request){
-        String language= String.valueOf(request.getAttribute("language"));
+        String language= String.valueOf(request.getHeader("language"));
         log.info("language :" +language);
         return ResponseEntity.ok().body(wordService.getAllWordsByLanuage(language));
     }
