@@ -10,6 +10,6 @@ public interface WordRepository extends MongoRepository<Word,String> {
     @Query("{ 'word' : ?0 }")
     Word findByWord(String word);
 
-    @Query("{$text: {$language:?0} }")
+    @Query("{'idiom': ?0 }")
     List<Word> findAllByLanguage(String language);
 }
