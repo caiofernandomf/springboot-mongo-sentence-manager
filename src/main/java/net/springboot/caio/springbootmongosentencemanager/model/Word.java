@@ -14,8 +14,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Word {
     @Id
     private String id;
-    @Indexed(name = "word")
+    @TextIndexed
     private String word;
 
     private String sentence;
+    @TextIndexed
+    private String idiom;
 }
