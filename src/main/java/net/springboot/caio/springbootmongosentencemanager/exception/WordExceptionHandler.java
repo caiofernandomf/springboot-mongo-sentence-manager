@@ -23,4 +23,16 @@ public class WordExceptionHandler {
                 .status(httpStatus)
                 .body(exception.getMessage());
     }
+
+    @ExceptionHandler(value = {Exception.class})
+    public ResponseEntity<Object> handleWordsAlreadyExistsException(
+            Exception exception,
+            HttpServletRequest httpServletRequest
+    ){
+        HttpStatus httpStatus = HttpStatus.BAD_REQUEST;
+
+        return ResponseEntity
+                .status(httpStatus)
+                .body(exception.getMessage());
+    }
 }
