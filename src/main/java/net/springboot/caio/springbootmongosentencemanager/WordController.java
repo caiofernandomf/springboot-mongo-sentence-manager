@@ -10,7 +10,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Stream;
 
 @AllArgsConstructor
 @RestController
@@ -52,6 +54,17 @@ public class WordController {
         String language= String.valueOf(request.getHeader("language"));
         log.info("language :" +language);
         return ResponseEntity.ok().body(wordService.getAllWordsByLanuage(language));
+    }
+
+    @GetMapping("/language/{languageId}")
+    public ResponseEntity<List<Word>> getByLanguage(@PathVariable String languageId){
+        log.info("language :" +languageId);
+        return ResponseEntity.ok().body(wordService.getAllWordsByLanuage(languageId));
+    }
+
+    @PostMapping("/many")
+    public ResponseEntity<Collection<Word>> createListOfWords(@RequestBody Collection<Word> word){
+        return ResponseEntity.ok().body(wordService.insertMany(word));
     }
 
 }
