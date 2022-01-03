@@ -2,6 +2,7 @@ package net.springboot.caio.springbootmongosentencemanager.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import net.springboot.caio.springbootmongosentencemanager.exception.WordNotFoundException;
 
 import java.util.stream.Stream;
 @AllArgsConstructor
@@ -17,9 +18,11 @@ public enum Language {
 
     public static Language fromName(String name){
         return Stream.of(Language.values())
-                .filter(language -> language.getName().contains(name.toUpperCase()))
+                .filter(language ->
+                        language.getName().contains(name.toUpperCase())
+                        || language.getId().equals(name.toUpperCase()))
                 .findFirst()
-                .orElseThrow(() ->new RuntimeException("Language not found [ "+name+" ]"));
+                .orElseThrow(() ->new WordNotFoundException("Language not found [ "+name+" ]"));
     }
 
 }
